@@ -1,4 +1,3 @@
-google-analytics-l4
-===================
+# Universal Analytics PHP Package
 
-Google Analytics for Laravel 4
+Add Universal Analytics to your PHP application, easily.

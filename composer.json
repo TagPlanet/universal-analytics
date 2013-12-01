@@ -1,0 +1,22 @@
+{
+    "name": "tag-planet/universal-analytics",
+    "description": "Provides an easy way to include Universal Analytics code with your application",
+    "tags": ["universal-analytics", "analytics", "laravel"],
+    "authors": [
+        {
+            "name": "Philip Lawrence",
+            "email": "philip@misterphilip.com",
+            "homepage": "http://misterphilip.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "TagPlanet\\UniversalAnalytics": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
