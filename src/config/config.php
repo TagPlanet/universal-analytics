@@ -25,18 +25,41 @@ return array(
      * Account IDs
      * 
      * Your account ID, provided by Google, will let the server know where to 
-     * send the data to. This should be an "account id" => "option array" 
-     * key/value pair. An example is below:
-     * 
-     * 'UA-000000-0' => array(
-     *    'name' => 'foobar',
-     *    'domainName' => 'foobar.com',
-     * ),
+     * send the data to. All accounts should have a friendly name alpha-numeric key
+     * that allows you to access it at a later time. 
      *
-     * If the options are not needed, you can simply add it as a string:
-     * 'UA-123456-1',
+     * 
+     * For basic installations, simply use a name => account key/value pair:
+     *
+     * 'trackerName' => 'UA-123456-1',
+     *
+     * 
+     * If you need to pass in more options with the create call (e.g. setting a domain)
+     * you'll need to create an array with an 'account' string and 'options' associative 
+     * array of configuration values:
+     * 
+     * 'foobar' => array(
+     *    'account' => 'UA-000000-0',
+     *    'options' => array(
+     *      'domainName' => 'foobar.com',
+     *    ),
+     * ),
+     * 
+     * The code will use the friendly name you used for the 'name' field in the 
+     * configuration option by default. You can override this in the configuration "name" field:
+     * 
+     * 'foobar' => array(
+     *    'account' => 'UA-000000-0',
+     *    'options' => array(
+     *      'domainName' => 'foobar.com',
+     *      'name' => 'customName',
+     *    ),
+     * ),
+     * 
+     * Read more about working with tracker names:
+     * https://developers.google.com/analytics/devguides/collection/analyticsjs/advanced#multipletrackers
      */
     'accounts' => array(
-        
+        'trackerName' => 'UA-123456-1',
     ),
 );

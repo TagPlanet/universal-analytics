@@ -55,17 +55,29 @@ class UniversalAnalytics
         if(is_array($accountConfig) && count($accountConfig))
         {
             // Loop through all of the accounts we're going to use
-            foreach($accountConfig as $account => $options)
+            foreach($accountConfig as $name => $info)
             {
-                if(is_string($options))
+                if(is_string($info))
                 {
                     // If the user didn't want options, they can pass the account string
-                    $this->create($options);
+                    $this->create($info, array('name' => $name));
                 }
                 else
                 {
                     // We have options!
-                    $this->create($account, $options);
+                    if(!isset($info['account']) || empty($info['account']))
+                    {
+                        throw new InvalidArgumentException('Unspecified Universal Analytics account ID');
+                    }
+                    
+                    // Not sure why you'd use this syntax without adding options, but OK.
+                    if(!isset($info['options'])) $info['options'] = array();
+                    
+                    // Add in our name
+                    $info['options']['name'] = $name;
+                    
+                    // Create it!
+                    $this->create($info['account'], $options);
                 }
             }
         }
@@ -86,27 +98,28 @@ class UniversalAnalytics
      * 
      * @return TagPlanet\UniversalAnalytics\UniversalAnalyticsInstance
      */
-    public function get($account = '')
+    public function get($name)
     {
-        if($account == '')
+        if($name == '')
         {
+            // If no name was passed, we'll assume they wanted the first (and usually only)
             if(count($this->instances) == 1)
             {
-                // Grab the instance without knowing account ID
+                // Grab the instance without knowing tracker name
                 $instances = array_values($this->instances);
                 return array_shift($instances);
             }
             
             // More or less than one instances
-            throw new InvalidArgumentException('Unspecified Universal Analytics account ID');
+            throw new InvalidArgumentException('Unspecified Universal Analytics tracker name');
         }
         
-        // Positive look up on the account ID?
-        if(isset($this->instances[$account]))
-            return $this->instances[$account];
+        // Positive look up on the tracker name?
+        if(isset($this->instances[$name]))
+            return $this->instances[$name];
             
-        // No UA instance with that account ID! Are you sure?
-        throw new Exception('Universal Analytics instance for "' . $account . '" doesn\'t exist');
+        // No UA instance with that tracker name! Are you sure?
+        throw new Exception('Universal Analytics instance for "' . $name . '" doesn\'t exist');
     }
     
     /**
@@ -116,9 +129,9 @@ class UniversalAnalytics
      */
     protected function create($account, $config = array())
     {
-        if(!isset($config['name']) && count($this->instances))
+        if(!isset($config['name']))
         {
-            // Force a namespace for the lazy
+            // This shouldn't happen anymore... but just in case, force it!
             $config['name'] = 't' . count($this->instances);
         }
         
@@ -127,10 +140,10 @@ class UniversalAnalytics
         $autoPageview = $this->autoPageview;
         
         // Finally, make a new instance
-        $this->instances[$account] = new UniversalAnalyticsInstance($account, $config, $debug, $autoPageview);
+        $this->instances[$config['name']] = new UniversalAnalyticsInstance($account, $config, $debug, $autoPageview);
         
         // Return the newly created instance
-        return $this->instances[$account];
+        return $this->instances[$config['name']];
     }
     
     /**
