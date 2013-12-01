@@ -1,7 +1,8 @@
 {
     "name": "tag-planet/universal-analytics",
-    "description": "Provides an easy way to include Universal Analytics code with your application",
+    "description": "Provides an easy way to include Universal Analytics code with your Laravel 4 application",
     "tags": ["universal-analytics", "analytics", "laravel"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Philip Lawrence",
@@ -9,6 +10,10 @@
             "homepage": "http://misterphilip.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/TagPlanet/universal-analytics/issues",
+        "source": "https://github.com/TagPlanet/universal-analytics/tree/master"
+    },
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "4.0.x"
