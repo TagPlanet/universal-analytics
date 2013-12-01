@@ -47,11 +47,11 @@ class UniversalAnalytics
     {
         // Setup our defaults/configs
         $this->app = $app;
-        $this->debug = (bool) \Config::get('universal-analytics::general.debug', false);
-        $this->autoPageview = (bool) \Config::get('universal-analytics::general.autoPageview', true);
+        $this->debug = (bool) \Config::get('universal-analytics::config.debug', false);
+        $this->autoPageview = (bool) \Config::get('universal-analytics::config.autoPageview', true);
         
         // Check for any trackers we should auto create
-        $accountConfig = \Config::get('universal-analytics::accounts', false);
+        $accountConfig = \Config::get('universal-analytics::config.accounts', false);
         if(is_array($accountConfig) && count($accountConfig))
         {
             // Loop through all of the accounts we're going to use
