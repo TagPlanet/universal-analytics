@@ -20,14 +20,6 @@ class UniversalAnalyticsInstance
     public $autoPageview;
     
     /** 
-     * Account ID
-     *
-     * @protected
-     * @var string
-     */
-    protected $account = '';
-    
-    /** 
      * Tracker Name
      *
      * @protected
@@ -79,6 +71,7 @@ class UniversalAnalyticsInstance
      * GA call
      *
      * Replicates the call within analytics.js
+     * @throws InvalidArgumentException
      */
     public function ga( )
     {
@@ -156,7 +149,9 @@ EOT;
         
         // Do we need to add script tags?
         if($renderScriptTag)
+        {
             $js[] = '</script>';
+        }
         
         // Return our joined JS
         return implode($js, PHP_EOL);
@@ -185,5 +180,20 @@ EOT;
         
         // Return what we were given.. just in a better format!
         return $parameters;
+    }
+    
+    /*
+     * Magical stuff, get it!
+     * 
+     * @param string property
+     * 
+     * @return mixed
+     * @throws InvalidArgumentException
+     */
+    public function __get($property)
+    {
+        if(isset($this->$property))
+            return $this->$property;
+        throw new InvalidArgumentException('Unknown property "' . $property . '"');
     }
 }
