@@ -181,10 +181,10 @@ Now that you've created an instance and pushed data to it, you're going to want 
 
 ##### Render options
 
-There are 2 optional boolean arguments you can pass in to the `render` method.
+There are 3 optional boolean arguments you can pass in to the `render` method.
 
 ```php
-function render($renderCodeBlock, $renderJavaScriptTags);
+function render($renderCodeBlock = true, $renderJavaScriptTags = true, $clearData = true);
 ```
 
 `$renderCodeBlock`, will render the default Universal Analytics code block when set to `true`. By default this is set to `true`. 
@@ -203,7 +203,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 `$renderJavaScriptTags`, will render the `<script> ... </script>` tags around the code. By default this is set to `true`. 
 If you're appending the output to an existing JavaScript tag, set it to `false`. 
 
-Both of these arguments can be used when rendering all instances or just a single instance.
+`$clearData`, will clear all previous calls once the render is complete. If you have multiple renders on a page 
+for any reason, you should set this to `true`. Otherwise you'll get duplicate calls.
+
+All of these arguments can be used when rendering all instances or just a single instance.
 
 ##### Render all instances
 

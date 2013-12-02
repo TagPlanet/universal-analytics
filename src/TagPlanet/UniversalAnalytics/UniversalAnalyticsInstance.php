@@ -100,7 +100,7 @@ class UniversalAnalyticsInstance
      * 
      * @return string
      */
-    public function render($renderCodeBlock = true, $renderScriptTag = true)
+    public function render($renderCodeBlock = true, $renderScriptTag = true, $clearData = true)
     {        
         if($this->autoPageview)
         {
@@ -153,8 +153,22 @@ EOT;
             $js[] = '</script>';
         }
         
+        // Do we need to clear the data after each render?
+        if($clearData)
+        {
+            $this->clearData();
+        }
+        
         // Return our joined JS
         return implode($js, PHP_EOL);
+    }
+    
+    /*
+     * Clear existing calls
+     */
+    public function clearData( )
+    {
+        $this->data = array();
     }
     
     /*
