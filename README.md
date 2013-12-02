@@ -77,13 +77,13 @@ Below is an example of the same call, one in JavaScript and the other in PHP:
 ga('create', 'UA-123456-1', {'name': 'foo'});
 
 // PHP
-UniversalAnalytics:ga('create', 'UA-123456-1', ['name'=>'foo']);
+UniversalAnalytics::ga('create', 'UA-123456-1', ['name'=>'foo']);
 ```
 
 You can use any of the `ga` calls, just like you would with the JavaScript version. This will output the same code. 
 
 ```php
-UniversalAnalytics:ga('create', 'UA-123456-1', ['name'=>'foo', 'domainName' => 'tagpla.net']);
+UniversalAnalytics::ga('create', 'UA-123456-1', ['name'=>'foo', 'domainName' => 'tagpla.net']);
 ```
 
 Will output as the following in JS:
@@ -101,7 +101,7 @@ Again, all you'll need to do is call `UniversalAnalytics::ga( ... )` with the sa
 
 ```php
 // Setup a new tracker with "foo" as its name:
-$fooTracker = UniversalAnalytics:ga('create', 'UA-123456-1', ['name'=>'foo', 'domainName' => 'tagpla.net']);
+$fooTracker = UniversalAnalytics::ga('create', 'UA-123456-1', ['name'=>'foo', 'domainName' => 'tagpla.net']);
 ```
 
 It is highly recommended to pass a name to the tracker, but one will automatically be generated for you in the event it is missing. 
@@ -110,16 +110,16 @@ count of previous instances. E.g.:
 
 ```php
 // Name would be "foo":
-UniversalAnalytics:ga('create', 'UA-123456-1', ['name'=>'foo']);
+UniversalAnalytics::ga('create', 'UA-123456-1', ['name'=>'foo']);
 
 // Name would be "t1":
-UniversalAnalytics:ga('create', 'UA-123456-2');
+UniversalAnalytics::ga('create', 'UA-123456-2');
 
 // Name would be "bar":
-UniversalAnalytics:ga('create', 'UA-123456-3', ['name'=>'bar', 'domainName' => 'tagpla.net']);
+UniversalAnalytics::ga('create', 'UA-123456-3', ['name'=>'bar', 'domainName' => 'tagpla.net']);
 
 // Name would be "t3":
-UniversalAnalytics:ga('create', 'UA-123456-4', ['domainName' => 'tagpla.net']);
+UniversalAnalytics::ga('create', 'UA-123456-4', ['domainName' => 'tagpla.net']);
 ```
 
 #### Getting an existing instance
