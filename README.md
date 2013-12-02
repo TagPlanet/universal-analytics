@@ -5,6 +5,9 @@
 [Google Analytics](https://www.google.com/analytics/). This package allows you to easily 
 add it to your Laravel 4 application.
 
+[![Build Status](https://api.travis-ci.org/TagPlanet/universal-analytics.png)](https://travis-ci.org/TagPlanet/universal-analytics)
+[![ProjectStatus](http://stillmaintained.com/TagPlanet/universal-analytics.png)](http://stillmaintained.com/TagPlanet/universal-analytics)
+
 ## Table of Contents
   1. [Installation](#installation)
   1. [Usage](#usage)
