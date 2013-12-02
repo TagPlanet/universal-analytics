@@ -17,15 +17,14 @@ add it to your Laravel 4 application.
     1. [Calling methods](#calling-methods)
     1. [Rendering](#rendering)
   1. [Configuration](#configuration)
-    1. [Debug Mode](#debug-mode)
-    1. [Auto Pageviews](#auto-pageviews)
+    1. [Debug mode](#debug-mode)
+    1. [Auto pageviews](#auto-pageviews)
     1. [Accounts](#accounts)
-  1. [Release Notes](#release-notes)
+  1. [Release notes](#release-notes)
   1. [License](#license)
-  1. [Finding Help](#finding-help)
+  1. [Finding help](#finding-help)
 
 ## Installation
-
 Installation is simple thanks to [composer](http://getcomposer.org/). First, add the following `require` key to your 
 `composer.json` file:
 ```
@@ -71,7 +70,6 @@ Now you'll be able to edit the configuration options within `app/config/packages
 ## Usage
 
 #### Overview
-
 This package closely replicates the JavaScript code syntax to help developers easily transition to and from using this package. 
 Below is an example of the same call, one in JavaScript and the other in PHP:
 ```
@@ -98,7 +96,6 @@ ga("create", "UA-123456-1", {
 ```
 
 #### Creating new instances
-
 While the option exists to [auto create trackers](#accounts) via the configuration file, you can also create new instances on your own. 
 Again, all you'll need to do is call `UniversalAnalytics::ga( ... )` with the same arguments as you would pass in the JavaScript version:
 
@@ -108,7 +105,7 @@ $fooTracker = UniversalAnalytics:ga('create', 'UA-123456-1', ['name'=>'foo', 'do
 ```
 
 It is highly recommended to pass a name to the tracker, but one will automatically be generated for you in the event it is missing. 
-In this case, the name is `foo`, as seen in the options array. If a name hadn't been passed in the naming schema is `tX` where X is the 
+In this case, the name is `foo`, as seen in the options array. If a name hasn't been passed in the naming schema is `tX` where X is the 
 count of previous instances. E.g.:
 
 ```php
@@ -126,9 +123,8 @@ UniversalAnalytics:ga('create', 'UA-123456-4', ['domainName' => 'tagpla.net']);
 ```
 
 #### Getting an existing instance
-
 Now that you've created a tracker instance, you may need to grab it to call additional methods. If you created the tracker instance via 
-the configuration, you'll use the friendly name you used as the key (_See: [Accounts](#accounts)_). 
+the configuration, you'll use the friendly name you used as the key (_See: [Accounts](#accounts)_):
 
 ```php
 // Grab the "foo" instance
@@ -137,12 +133,11 @@ $tracker = UniversalAnalytics::get('foo');
 
 
 #### Calling methods
-
 It is likely that you'll want to add custom variables (dimensions / metrics) or track certain events. 
 Since the argument format is the same as the JavaScript version, explaining all of the options 
 is out of scope for this document. You can read up on the format over at [Google's documentation](https://developers.google.com/analytics/devguides/collection/analyticsjs/).
 
-You can push to a single instance once you've grabbed it (_see: [Getting an existing instance](getting-an-existing-instance)_):
+You can push to a single instance once you've grabbed it (_see: [Getting an existing instance](#getting-an-existing-instance)_):
 
 ```php
 // Grab the "foo" instance
@@ -179,11 +174,9 @@ UniversalAnalytics::ga('send', 'pageview');
 ```
 
 #### Rendering
-
 Now that you've created an instance and pushed data to it, you're going to want to render the JavaScript output at some point. 
 
 ##### Render options
-
 There are 3 optional boolean arguments you can pass in to the `render` method.
 
 ```php
@@ -212,7 +205,6 @@ for any reason, you should set this to `true`. Otherwise you'll get duplicate ca
 All of these arguments can be used when rendering all instances or just a single instance.
 
 ##### Render all instances
-
 In most cases you'll want to render all of the instances at once. To do this, place the following code just before the `</head>` of your main view layout:
 
 ```php
@@ -226,7 +218,6 @@ echo UniversalAnalytics::render();
 > If you prefer, you can also use a [View composer](http://laravel.com/docs/responses#view-composers).
 
 ##### Rendering single instances
-
 You can also render single instances if you need to:
 
 ```php
@@ -239,9 +230,8 @@ echo $fooTracker->render();
 
 
 ## Configuration
-
 Once you've published your configuration file, you can edit it at `app/config/packages/tag-planet/universal-analytics/settings.php`. 
-If you'd like to have configuration files on an enviroment-based level, you can do so via [these instructions](http://laravel.com/docs/configuration#environment-configuration).
+If you'd like to use configuration files on an enviroment-based level, you can do so via [these instructions](http://laravel.com/docs/configuration#environment-configuration).
 
 #### Debug mode
 Debug mode uses a different JS file that outputs information about what is sent to Universal Analytics via the browser console. 
@@ -253,7 +243,7 @@ This mode can be enabled by changing `debug` to `true`, or disabled by changing 
 
 > This should be set to `false` on production domains.
 
-#### Auto Pageviews
+#### Auto pageviews
 When auto pageviews are enabled, any time the `render` call has occured, a 
 [pageview event](https://developers.google.com/analytics/devguides/collection/analyticsjs/pages#implementation) 
 will automatically be appended. If there is not a need to pass in customized page locations or page titles, then it is recommended 
@@ -272,7 +262,7 @@ such as "tagplanetInstall". You can read more about tracker names over at
 and are provided to you when you create a new account or property within Google Analytics. If you're not sure on what this is, please take a look at 
 [Google's help file](https://support.google.com/analytics/answer/1032385?hl=en) to find it.
 
-##### Basic Format
+##### Basic format
 For those that don't need extra configuration options you can use the simplified format. The following example uses the friendly name 
 "trackerName" and an account ID of "UA-123456-1":
 
@@ -282,7 +272,7 @@ For those that don't need extra configuration options you can use the simplified
 ),
 ```
 
-##### Advanced Format
+##### Advanced format
 For those that do need extra configuration when you do a create call (e.g. setting the cookie domain or any of the 
 [create-only fields](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#create)), 
 you'll need to use the more advanced format. The following examples uses a friendly name of "foobar" and an account of "UA-654321-1":
@@ -298,7 +288,7 @@ you'll need to use the more advanced format. The following examples uses a frien
 ),
 ```
 
-## Release Notes
+## Release notes
 
 #### Version 1.0.0
 Initial Version
@@ -306,5 +296,5 @@ Initial Version
 ## License
 Tag Planet's Universal Analytics for Laravel 4 is free software distributed under the terms of the MIT license.
 
-## Finding Help
+## Finding help
 Should you have any questions, bug reports, or feedback please utilize our [issue tracker](https://github.com/TagPlanet/universal-analytics/issues).
